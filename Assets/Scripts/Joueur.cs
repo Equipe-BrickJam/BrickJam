@@ -17,20 +17,24 @@ public class Joueur : MonoBehaviour
     void Update()
     {
         GetComponent<Rigidbody2D>().linearVelocity = velocitePerso;
-        
-        if (Input.GetKeyDown(KeyCode.D)) //Déplacement vers la droite
+        Mouvement();
+    }
+
+    private void Mouvement() 
+    {
+        if (Input.GetKey(KeyCode.D)) //Déplacement vers la droite
         {
             velocitePerso.x = vitesseDeplacement;
         }
 
-        else if (Input.GetKeyDown(KeyCode.A)) //Déplacement vers la gauche
+        else if (Input.GetKey(KeyCode.A)) //Déplacement vers la gauche
         {
             velocitePerso.x = -vitesseDeplacement;
         }
 
         else
         {
-            velocitePerso.x = GetComponent<Rigidbody2D>().linearVelocity.x; //Vitesse actuelle X
+            velocitePerso.x = 0f;
         }
     }
 }
