@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8633913236120130400}
   - component: {fileID: 3553795211936135059}
   - component: {fileID: 2110274129794645639}
+  - component: {fileID: -6618750129039105177}
+  - component: {fileID: -3793909827891495957}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -118,6 +120,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31ff12fc20af424ca7bc51929c91bfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Joueur
+  ShowTopMostFoldoutHeaderGroup: 1
+  vitesseDeplacement: 1
+  vitesseMaximale: 3
+--- !u!50 &-6618750129039105177
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108870692140312196}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &-3793909827891495957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108870692140312196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.Components.NetworkRigidbody2D
+  ShowTopMostFoldoutHeaderGroup: 1
+  NetworkRigidbodyBaseExpanded: 0
+  UseRigidBodyForMotion: 0
+  AutoUpdateKinematicState: 1
+  AutoSetKinematicOnDespawn: 1
 --- !u!1 &7121798102690798157
 GameObject:
   m_ObjectHideFlags: 0

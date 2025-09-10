@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 - Création du singleton pour s'assurer qu'il n'y a qu'une seule instance de ce script
 - Chargement de la scène "JeuMulti" au démarrage
 */
-public class LoadGame : MonoBehaviour
+public class LancementPartie : MonoBehaviour
 {
-   public static LoadGame instance;
+   public static LancementPartie instance;
 
    void Awake()
    {
