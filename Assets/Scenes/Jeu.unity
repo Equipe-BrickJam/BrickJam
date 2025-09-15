@@ -468,7 +468,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 324734807}
-    PlayerPrefab: {fileID: 5108870692140312196, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
+    PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: c22e20a2e199f4ffab0e36da37d57fcb, type: 2}
@@ -1735,6 +1735,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ShowTopMostFoldoutHeaderGroup: 1
+  Player1: {fileID: 5108870692140312196, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
+  Player2: {fileID: 8693975779874012603, guid: f5c961eda33964976b9aca1e8daf93af, type: 3}
   ballPrefab: {fileID: 128217479}
 --- !u!4 &1556087034
 Transform:
