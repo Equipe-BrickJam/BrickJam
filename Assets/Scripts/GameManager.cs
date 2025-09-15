@@ -7,6 +7,7 @@ public class GameManager : NetworkBehaviour
     public static GameManager instance;// Singleton pour parler au GameManager de n'importe où
     public bool partieEnCours{ private set; get; } //permet de savoir si une partie est en cours
     public bool partieTerminee{ private set; get; } // permet de savoir si une partie est terminée
+    [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
 
     void Update()
     {
@@ -20,9 +21,9 @@ public class GameManager : NetworkBehaviour
     }
 
     public void NouvellePartie()
-   {
-       partieEnCours = true;
-       BalleRigid.instance.LanceBalleMilieu();
+    {
+        partieEnCours = true;
+        BalleRigid.instance.LanceBalleMilieu();
    }
 
     // Fonction appelée par le ScoreManager pour terminer la partie (nous l'utilserons plus tard)
