@@ -10,10 +10,16 @@ public class Joueur : NetworkBehaviour
 
     private Vector2 velocitePerso;
 
+    public GameObject Player1;
+    public GameObject Player2;
+
     // Fontion semblale au start, mais pour les objets réseaux et s'éxécute avant
    public override void OnNetworkSpawn()
    {
        base.OnNetworkSpawn();
+
+       // Abonnement au callback OnClientConnectedCallback qui lancera la fonction OnNouveauClientConnecte.
+       NetworkManager.Singleton.OnClientConnectedCallback += OnNouveauClientConnecte;
 
        if (IsServer)
        {
@@ -24,6 +30,27 @@ public class Joueur : NetworkBehaviour
            transform.position = new Vector3(0f, 3.86f, 0f); //position à ajuster selon votre jeu
        }
    }
+
+
+    private void OnNouveauClientConnecte(ulong obj)
+   {
+       if (!IsServer) return;
+
+       if (NetworkManager.Singleton.ConnectedClients.Count == 1) 
+       {
+           GameObject nouveauJoueur = Instantiate(Player1);
+           nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+       }
+       else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
+       {
+           GameObject nouveauJoueur = Instantiate(Player2);
+           nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+           
+       }
+       //Mettre une fonction qui commence la partie
+       GetComponent<GameManager>().NouvellePartie();
+   }
+
 
 
 

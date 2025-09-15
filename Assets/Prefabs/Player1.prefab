@@ -123,6 +123,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   vitesseDeplacement: 3
   vitesseMaximale: 3
+  Player1: {fileID: 5108870692140312196}
+  Player2: {fileID: 8693975779874012603, guid: f5c961eda33964976b9aca1e8daf93af, type: 3}
 --- !u!50 &-6618750129039105177
 Rigidbody2D:
   serializedVersion: 5
