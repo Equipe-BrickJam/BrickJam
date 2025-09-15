@@ -283,21 +283,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
   m_PrefabInstance: {fileID: 8214662938223990432}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &128217486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128217479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39f37baf84efb4d48bf6120183f62df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BalleRigid
-  ShowTopMostFoldoutHeaderGroup: 1
-  nombreDeBonds: 0
-  maxSpeed: 2
 --- !u!1 &159734454
 GameObject:
   m_ObjectHideFlags: 0
@@ -1750,6 +1735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   ShowTopMostFoldoutHeaderGroup: 1
+  ballPrefab: {fileID: 128217479}
 --- !u!4 &1556087034
 Transform:
   m_ObjectHideFlags: 0
@@ -2144,6 +2130,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1949922084325438012, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
+      propertyPath: UseRigidBodyForMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2624007139995607481, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 1100182080
@@ -2192,6 +2182,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7076253800072728576, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
+      propertyPath: SyncScaleX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076253800072728576, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
+      propertyPath: SyncScaleY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7076253800072728576, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
+      propertyPath: SyncScaleZ
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8426993670081169037, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
       propertyPath: m_Material
       value: 
@@ -2199,10 +2201,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 128217486}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
 --- !u!1001 &8777347051890830326
 PrefabInstance:
