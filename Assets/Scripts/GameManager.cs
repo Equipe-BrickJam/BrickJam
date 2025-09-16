@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour
     public bool partieEnCours{ private set; get; } //permet de savoir si une partie est en cours
     public bool partieTerminee{ private set; get; } // permet de savoir si une partie est terminée
     [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
+    private BalleRigid balleInstance;
 
 
 // Création du singleton si nécessaire
@@ -44,26 +45,37 @@ public class GameManager : NetworkBehaviour
            
        }
        //Mettre une fonction qui commence la partie
-       NouvellePartie();
+    //    NouvellePartie();
        }
 
-    // void Update()
-    // {
-    //     if (!IsHost) return;
-    //    if (partieEnCours) return;
+    void Update()
+    {
+       if (!IsHost) return;
+       if (partieEnCours) return;
 
-    //    if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
-    //    {
-    //        NouvellePartie();
-    //    }
-    // }
+       if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
+       {
+         NouvellePartie();
+       }
+    }
 
     
    
 
     public void NouvellePartie()
     {
+        if (!IsServer) return;
+
         partieEnCours = true;
+
+        // If the ball doesn’t exist yet, spawn it
+        if (BalleRigid.instance == null)
+        {
+            GameObject balle = Instantiate(ballPrefab, new Vector2(0f, 0.5f), Quaternion.identity);
+            balle.GetComponent<NetworkObject>().Spawn(true); // true = server owns it
+            balleInstance = balle.GetComponent<BalleRigid>();
+        }
+
         BalleRigid.instance.LanceBalleMilieu();
    }
 
