@@ -10,10 +10,13 @@ public class Joueur : NetworkBehaviour
 
     private Vector2 velocitePerso;
 
+   
     // Fontion semblale au start, mais pour les objets réseaux et s'éxécute avant
    public override void OnNetworkSpawn()
    {
        base.OnNetworkSpawn();
+      
+
 
        if (IsServer)
        {
@@ -25,8 +28,6 @@ public class Joueur : NetworkBehaviour
        }
    }
 
-
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,7 +37,7 @@ public class Joueur : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!IsLocalPlayer) return;
+        if(!IsOwner) return;
        
         Mouvement();
     }

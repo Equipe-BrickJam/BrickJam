@@ -56,8 +56,9 @@ public class BalleRigid : NetworkBehaviour
     {
         nombreDeBonds = 0;
         GetComponent<NetworkTransform>().Interpolate = false;
-        transform.position = new Vector3(0f, 0.5f, 0f);
-        GetComponent<Rigidbody>().linearVelocity = new Vector3(0, 0, 0);
+        transform.position = new Vector2(0f, 0.5f);
+        GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+
         if (GameManager.instance.partieTerminee) return; // Il faudra créer cette variable dans le GameManager
         StartCoroutine(NouvelleBalle());
     }
@@ -71,6 +72,7 @@ public class BalleRigid : NetworkBehaviour
        float aleaX = random.Next(0, 2) == 0 ? -10 : 10; //  opérateur ternaire
        float aleaZ = random.Next(0, 2) == 0 ? -10 : 10;
 
-       GetComponent<Rigidbody>().AddForce(aleaX, 0, aleaZ, ForceMode.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(aleaX, aleaZ), ForceMode2D.Impulse);
+
    }
 }
