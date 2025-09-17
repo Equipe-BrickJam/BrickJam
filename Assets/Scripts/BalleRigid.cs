@@ -75,4 +75,12 @@ public class BalleRigid : NetworkBehaviour
         GetComponent<Rigidbody2D>().AddForce(new Vector2(aleaX, aleaZ), ForceMode2D.Impulse);
 
    }
+
+   private void onCollisonEnter2D(Collision2D infoCollision) 
+   {
+       if(infoCollision.gameObject.tag == "Bouclier")  
+       {
+           nombreDeBonds++;
+       }
+   }
 }

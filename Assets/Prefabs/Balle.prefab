@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7404130602565552872, guid: 719e3e38cec83664faa127f66942e73a, type: 3}
+  m_Sprite: {fileID: 6181562229085032920, guid: 7be285b854a35db4eaef0ea5074bac65, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -190,7 +190,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2624007139995607481
 MonoBehaviour:
   m_ObjectHideFlags: 0
