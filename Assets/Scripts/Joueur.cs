@@ -15,7 +15,6 @@ public class Joueur : NetworkBehaviour
    public override void OnNetworkSpawn()
    {
        base.OnNetworkSpawn();
-      
 
 
        if (IsServer)
@@ -44,6 +43,9 @@ public class Joueur : NetworkBehaviour
 
     private void Mouvement() 
     {
+        if (IsClient && !IsServer){
+            Debug.Log($"Mouvement appelé par Client {OwnerClientId}");
+        }
         if (Input.GetKey(KeyCode.D)) //Déplacement vers la droite
         {
             velocitePerso.x = vitesseDeplacement;
