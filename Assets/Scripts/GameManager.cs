@@ -11,7 +11,7 @@ public class GameManager : NetworkBehaviour
     public bool partieEnCours{ private set; get; } //permet de savoir si une partie est en cours
     public bool partieTerminee{ private set; get; } // permet de savoir si une partie est terminée
     [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
-    private BalleRigid balleInstance;
+    public BalleRigid balleInstance;
 
 
 // Création du singleton si nécessaire
@@ -20,6 +20,7 @@ public class GameManager : NetworkBehaviour
        if (instance == null)
        {
            instance = this;
+           //dont destroyonload
        }
        else
        {
@@ -30,18 +31,27 @@ public class GameManager : NetworkBehaviour
    }
     public void OnNouveauClientConnecte(ulong obj)
     {
-       if (!IsServer) return;
+       if (!IsServer) 
+       {
+
+        // Si je suis client j'affiche le panneua d'attente 
+        //NavigationManager.singleton.AfficheAttenteClient();
+        
+        return;}
 
        if (NetworkManager.Singleton.ConnectedClients.Count == 1) 
        {
            GameObject nouveauJoueur = Instantiate(Player1);
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+            // Si je suis client j'affiche le panneua d'attente 
+            //NavigationManager.singleton.AfficheAttenteServeur();
 
        }
        else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
        {
            GameObject nouveauJoueur = Instantiate(Player2);
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+           //NavigationManager.singleton.AffichePanelServeurPartie();
            
        }
        //Mettre une fonction qui commence la partie
@@ -50,13 +60,13 @@ public class GameManager : NetworkBehaviour
 
     void Update()
     {
-       if (!IsHost) return;
-       if (partieEnCours) return;
+        if (!IsHost) return;
+        if (partieEnCours) return;
 
-       if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
-       {
-         NouvellePartie();
-       }
+        if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
+        {
+          NouvellePartie();
+        }
     }
 
     
@@ -98,4 +108,8 @@ public class GameManager : NetworkBehaviour
    {
        NetworkManager.Singleton.StartClient(); // Fonction du NetworkManager pour démarrer une partie comme client
    }
+
+
+   //changement de scene
+   //NetworkManager Singleton.SceneManager Loadscene("Jeu")
 }
