@@ -4,9 +4,7 @@ public class CollisionBlockGlace : MonoBehaviour
 {
     public GameObject balle;
 
-    private float compteur = 0; // Compter le nombre de fois que le block est touché
-
-    private float NbFois; //Le nombre de fois que la balle touche le block
+    private int NbFois = 0; //Le nombre de fois que la balle touche le block
 
     public Sprite blocInitialGlace;
     public Sprite blockDamage1Glace;
@@ -15,7 +13,6 @@ public class CollisionBlockGlace : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        NbFois = compteur;
         
     }
 
@@ -25,7 +22,7 @@ public class CollisionBlockGlace : MonoBehaviour
         
     }
 
-    private void onCollisonEnter2D(Collision2D infoCollision)
+    private void OnCollisionEnter2D(Collision2D infoCollision)
     {
         if (infoCollision.gameObject.name == "Balle")
         {
