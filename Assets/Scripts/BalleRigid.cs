@@ -78,7 +78,8 @@ public class BalleRigid : NetworkBehaviour
 
    private void onCollisonEnter2D(Collision2D infoCollision) 
    {
-       if(infoCollision.gameObject.tag == "Bouclier")  
+       //Si elle rentre en collision avec un blouclier OU un block
+       if(infoCollision.gameObject.tag == "Bouclier" || infoCollision.gameObject.tag == "Block")  
        {
            nombreDeBonds++;
 
@@ -88,5 +89,8 @@ public class BalleRigid : NetworkBehaviour
 
        GetComponent<Rigidbody2D>().AddForce(new Vector2(-aleaX, -aleaZ), ForceMode2D.Impulse);
        }
+
+       
+
    }
 }

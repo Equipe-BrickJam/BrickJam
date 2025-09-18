@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &238355588936553085
+--- !u!1 &3249952309634958389
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4177004305327871486}
-  - component: {fileID: 79547157591746771}
-  - component: {fileID: 220419796742517812}
-  - component: {fileID: -3906855126341591778}
+  - component: {fileID: 1858198975344695691}
+  - component: {fileID: 846422092462343174}
+  - component: {fileID: 4895256320274124376}
+  - component: {fileID: 5167166643704830622}
   m_Layer: 0
-  m_Name: BlocFeu
+  m_Name: BlocGlace
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4177004305327871486
+--- !u!4 &1858198975344695691
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238355588936553085}
+  m_GameObject: {fileID: 3249952309634958389}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.4952, y: 0.7809, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.12, y: 0.5, z: 0}
   m_LocalScale: {x: 0.03559905, y: 0.03559905, z: 0.03559905}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &79547157591746771
+--- !u!212 &846422092462343174
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238355588936553085}
+  m_GameObject: {fileID: 3249952309634958389}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2047952299898372700, guid: c490f0216541f404387c263f5b28c05e, type: 3}
+  m_Sprite: {fileID: 4442551194899782039, guid: 74db78c7d369b1b43bf078962829c11e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -92,13 +92,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &220419796742517812
+--- !u!61 &4895256320274124376
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238355588936553085}
+  m_GameObject: {fileID: 3249952309634958389}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -138,19 +138,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 42.26, y: 10.99833}
   m_EdgeRadius: 0
---- !u!114 &-3906855126341591778
+--- !u!114 &5167166643704830622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238355588936553085}
+  m_GameObject: {fileID: 3249952309634958389}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9e49ad77bba43c44bacc143632f1117, type: 3}
+  m_Script: {fileID: 11500000, guid: fb7fd2306727a1e4cad02e861f987bc9, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CollisionBlock
+  m_EditorClassIdentifier: Assembly-CSharp::CollisionBlockGlace
   balle: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
-  blocInitialFeu: {fileID: -2047952299898372700, guid: c490f0216541f404387c263f5b28c05e, type: 3}
-  blockDamage1Feu: {fileID: -669169337684323110, guid: 35ea23bd621ef5946845e28db5e445e7, type: 3}
-  blockDamage2Feu: {fileID: -3260012794153356808, guid: 8b3b649dd57f81f45a69bedc7dccd230, type: 3}
+  blocInitialGlace: {fileID: 4442551194899782039, guid: 74db78c7d369b1b43bf078962829c11e, type: 3}
+  blockDamage1Glace: {fileID: -4020989914308434370, guid: c1cac9bca319cc64494c83646f7e6a60, type: 3}
+  blockDamage2Glace: {fileID: -9129076192598572955, guid: ec117dc133aec144e86a7c40d2dd7cb6, type: 3}

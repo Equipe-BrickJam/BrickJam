@@ -54,8 +54,7 @@ public class GameManager : NetworkBehaviour
            //NavigationManager.singleton.AffichePanelServeurPartie();
            
        }
-       //Mettre une fonction qui commence la partie
-    //    NouvellePartie();
+ 
        }
 
     void Update()

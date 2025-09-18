@@ -20,11 +20,11 @@ public class Joueur : NetworkBehaviour
 
        if (IsServer)
        {
-           transform.position = new Vector3(0f, -3.86f, 0f); //position à ajuster selon votre jeu
+           transform.position = new Vector3(0f, -4.49f, 0f); //position à ajuster selon votre jeu
        }
        else
        {
-           transform.position = new Vector3(0f, 3.86f, 0f); //position à ajuster selon votre jeu
+           transform.position = new Vector3(0f, 4.49f, 0f); //position à ajuster selon votre jeu
        }
    }
 
