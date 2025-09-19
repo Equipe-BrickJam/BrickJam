@@ -7,6 +7,10 @@ TagManager:
   - Bouclier
   - Block
   - Balle
+  - BalleJoueur1
+  - BalleJoueur2
+  - Joueur1
+  - Joueur2
   layers:
   - Default
   - TransparentFX

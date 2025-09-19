@@ -18,7 +18,7 @@ public class CollisionBlockGlace : MonoBehaviour
         //Chercher le sprite renderer une seule fois dans le start au lieu du update
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //S'assurer que la sprite initiale est chargée en premier
+        //S'assurer que la sprite initiale est chargï¿½e en premier
         spriteRenderer.sprite = blocInitialGlace;
 
     }
@@ -31,25 +31,25 @@ public class CollisionBlockGlace : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
     {
-        if (infoCollision.gameObject.CompareTag("Balle"))
+        if (infoCollision.gameObject.CompareTag("BalleJoueur1"))
         {
             //Le nombre de fois augmente de 1
             NbFois++;
 
             if (NbFois == 1)
             {
-                //On change le sprite du blockInitial à blockDamage1
+                //On change le sprite du blockInitial ï¿½ blockDamage1
                 spriteRenderer.sprite = blockDamage1Glace;
             }
             else if (NbFois == 2)
             {
-                //On change le sprite du blockInitial à blockDamage1
+                //On change le sprite du blockInitial ï¿½ blockDamage1
                 spriteRenderer.sprite = blockDamage2Glace;
 
             }
             else if (NbFois == 3)
             {
-                //On change le sprite du blockInitial à blockDamage1
+                //On change le sprite du blockInitial ï¿½ blockDamage1
                 Destroy(gameObject);
 
             }

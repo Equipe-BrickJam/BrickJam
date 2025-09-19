@@ -11,6 +11,8 @@ public class BalleRigid : NetworkBehaviour
     float maxDistanceX = 25f; // moitié de la largeur de la table, pour savoir si un but est compté
     [SerializeField] private float nombreDeBonds; //compte du nombre de bonds de la balle // Servira plus tard
     [SerializeField] private float maxSpeed; // si on veut limiter la vitesse max de la balle (inutilisé)
+    public string tagJoueur1 = "BalleJoueur1";
+    public string tagJoueur2 = "BalleJoueur2";
 
     private void Awake()
     {
@@ -50,6 +52,16 @@ public class BalleRigid : NetworkBehaviour
       // Ici, il faudra aussi augmenter le score du joueur
       LanceBalleMilieu();
     }
+
+    if(gameObject.Find("BlocGlace") == null) 
+    {
+      Joueur1Gagne();
+    }
+
+    else if (gameObject.Find("BlocFeu") == null) 
+    {
+      Joueur2Gagne();
+    }
   }
 
   public void LanceBalleMilieu()
@@ -76,21 +88,29 @@ public class BalleRigid : NetworkBehaviour
 
    }
 
-  //  private void onCollisonEnter2D(Collision2D infoCollision) 
-  //  {
-  //      //Si elle rentre en collision avec un blouclier OU un block
-  //      if(infoCollision.gameObject.tag == "Bouclier" || infoCollision.gameObject.tag == "Block")  
-  //      {
-  //          nombreDeBonds++;
+   private void OnCollisionEnter2D(Collision2D infoCollision) 
+   {
+      //Si elle rentre en collision avec un blouclier OU un block
+      if(infoCollision.gameObject.tag == "Joueur1")
+      {
+        gameObject.tag = tagJoueur1;
+        Debug.Log("Tag changed to: " + gameObject.tag);
+      }
 
-  //      System.Random random = new System.Random();
-  //      float aleaX = random.Next(0, 2) == 0 ? -10 : 10; //  opérateur ternaire
-  //      float aleaZ = random.Next(0, 2) == 0 ? -10 : 10;
+      else if (infoCollision.gameObject.tag == "Joueur2") 
+      {
+        gameObject.tag = tagJoueur2;
+        Debug.Log("Tag changed to: " + gameObject.tag);
+      }
+   }
 
-  //      GetComponent<Rigidbody2D>().AddForce(new Vector2(-aleaX, -aleaZ), ForceMode2D.Impulse);
-  //      }
+   public void Joueur1Gagne() 
+   {
 
-       
+   }
 
-  //  }
+    public void Joueur2Gagne() 
+   {
+
+   }
 }
