@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bouclier
   - Block
+  - Balle
   layers:
   - Default
   - TransparentFX
