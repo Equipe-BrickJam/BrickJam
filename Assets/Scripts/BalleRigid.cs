@@ -53,12 +53,12 @@ public class BalleRigid : NetworkBehaviour
       LanceBalleMilieu();
     }
 
-    if(gameObject.Find("BlocGlace") == null) 
+    if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
     {
       Joueur1Gagne();
     }
 
-    else if (gameObject.Find("BlocFeu") == null) 
+    else if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0) 
     {
       Joueur2Gagne();
     }

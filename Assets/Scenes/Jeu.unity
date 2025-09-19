@@ -204,6 +204,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlocFeu
       objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2409349473
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
+      objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.24
@@ -775,6 +787,18 @@ PrefabInstance:
     - target: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_Name
       value: BlocFeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 919114954
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
       objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1571,6 +1595,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlocGlace
       objectReference: {fileID: 0}
+    - target: {fileID: 3249952309634958389, guid: 3b273f565f5c95a4bad028f37a8a329f, type: 3}
+      propertyPath: m_TagString
+      value: BlocGlace
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1587,6 +1615,18 @@ PrefabInstance:
     - target: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_Name
       value: BlocFeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 593932317
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
       objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1749,6 +1789,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlocFeu
       objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1047373532
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
+      objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.4351
@@ -1805,6 +1857,18 @@ PrefabInstance:
     - target: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_Name
       value: BlocFeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 248862195
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
       objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2033,6 +2097,18 @@ PrefabInstance:
     - target: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_Name
       value: BlocFeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 152526546
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
       objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2620,6 +2696,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlocFeu
       objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3973013682
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
+      objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3051
@@ -2677,6 +2765,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlocFeu
       objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1705374443
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
+      objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.3849
@@ -2733,6 +2833,18 @@ PrefabInstance:
     - target: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_Name
       value: BlocFeu
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2161757854
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3442125804404021456, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 2618405652
       objectReference: {fileID: 0}
     - target: {fileID: 4177004305327871486, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
       propertyPath: m_LocalPosition.x

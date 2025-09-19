@@ -11,6 +11,8 @@ TagManager:
   - BalleJoueur2
   - Joueur1
   - Joueur2
+  - BlocGlace
+  - BlocFeu
   layers:
   - Default
   - TransparentFX
