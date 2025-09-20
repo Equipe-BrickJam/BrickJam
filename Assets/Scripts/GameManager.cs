@@ -7,6 +7,9 @@ public class GameManager : NetworkBehaviour
     public GameObject Player1;
     public GameObject Player2;
 
+    public NetworkObject boutonHote;
+    public NetworkObject boutonClient;
+
     public static GameManager instance;// Singleton pour parler au GameManager de n'importe où
     public bool partieEnCours{ private set; get; } //permet de savoir si une partie est en cours
     public bool partieTerminee{ private set; get; } // permet de savoir si une partie est terminée
@@ -45,14 +48,21 @@ public class GameManager : NetworkBehaviour
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
             // Si je suis client j'affiche le panneua d'attente 
             //NavigationManager.singleton.AfficheAttenteServeur();
-
+            if (IsServer)
+            {
+                boutonHote.Despawn(true);
+            }
        }
        else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
        {
            GameObject nouveauJoueur = Instantiate(Player2);
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
-           //NavigationManager.singleton.AffichePanelServeurPartie();
-           
+            //NavigationManager.singleton.AffichePanelServeurPartie();
+            if (IsServer)
+            {
+                boutonClient.Despawn(true);
+            }
+            
        }
  
        }

@@ -1034,6 +1034,7 @@ GameObject:
   - component: {fileID: 971781284}
   - component: {fileID: 971781283}
   - component: {fileID: 971781282}
+  - component: {fileID: 971781285}
   m_Layer: 5
   m_Name: Client
   m_TagString: Untagged
@@ -1155,6 +1156,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971781280}
   m_CullTransparentMesh: 1
+--- !u!114 &971781285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971781280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 2026279329
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1 &1113313602
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,6 +2359,8 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   Player1: {fileID: 5108870692140312196, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
   Player2: {fileID: 8693975779874012603, guid: f5c961eda33964976b9aca1e8daf93af, type: 3}
+  boutonHote: {fileID: 2092185401}
+  boutonClient: {fileID: 971781285}
   ballPrefab: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
   balleInstance: {fileID: 0}
 --- !u!4 &1556087034
@@ -3107,6 +3135,7 @@ GameObject:
   - component: {fileID: 2092185400}
   - component: {fileID: 2092185399}
   - component: {fileID: 2092185398}
+  - component: {fileID: 2092185401}
   m_Layer: 5
   m_Name: ButtonHote
   m_TagString: Untagged
@@ -3228,6 +3257,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092185396}
   m_CullTransparentMesh: 1
+--- !u!114 &2092185401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092185396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 148221287
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 0
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!1001 &468639461127868828
 PrefabInstance:
   m_ObjectHideFlags: 0
