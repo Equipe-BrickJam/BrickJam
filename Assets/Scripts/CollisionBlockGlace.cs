@@ -1,6 +1,11 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using Unity.Netcode;
+using TMPro;
+using Unity.Netcode.Components;// pour accéder aux propriétés du NetworkTransform
 
-public class CollisionBlockGlace : MonoBehaviour
+public class CollisionBlockGlace : NetworkBehaviour
 {
     public GameObject balle;
 
@@ -49,8 +54,11 @@ public class CollisionBlockGlace : MonoBehaviour
             }
             else if (NbFois == 3)
             {
-                //On change le sprite du blockInitial � blockDamage1
-                Destroy(gameObject);
+                //Détruit l'objet
+                if (IsServer)
+                {
+                    NetworkObject.Despawn(true);
+                }
 
             }
         }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1858198975344695691}
   - component: {fileID: 846422092462343174}
   - component: {fileID: 4895256320274124376}
+  - component: {fileID: -711350079578180161}
   - component: {fileID: 5167166643704830622}
   m_Layer: 0
   m_Name: BlocGlace
@@ -138,6 +139,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 42.26, y: 10.99833}
   m_EdgeRadius: 0
+--- !u!114 &-711350079578180161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3249952309634958389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 3869715997
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &5167166643704830622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb7fd2306727a1e4cad02e861f987bc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionBlockGlace
+  ShowTopMostFoldoutHeaderGroup: 1
   balle: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
   blocInitialGlace: {fileID: 4442551194899782039, guid: 74db78c7d369b1b43bf078962829c11e, type: 3}
   blockDamage1Glace: {fileID: -4020989914308434370, guid: c1cac9bca319cc64494c83646f7e6a60, type: 3}

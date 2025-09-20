@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4177004305327871486}
   - component: {fileID: 79547157591746771}
   - component: {fileID: 220419796742517812}
+  - component: {fileID: -4823806447792991721}
   - component: {fileID: -3906855126341591778}
   m_Layer: 0
   m_Name: BlocFeu
@@ -138,6 +139,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 42.26, y: 10.99833}
   m_EdgeRadius: 0
+--- !u!114 &-4823806447792991721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238355588936553085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
+  GlobalObjectIdHash: 1261291014
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  DeferredDespawnTick: 0
+  Ownership: 1
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+  SyncOwnerTransformWhenParented: 1
+  AllowOwnerToParent: 0
 --- !u!114 &-3906855126341591778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,6 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9e49ad77bba43c44bacc143632f1117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionBlock
+  ShowTopMostFoldoutHeaderGroup: 1
   balle: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
   blocInitialFeu: {fileID: -2047952299898372700, guid: c490f0216541f404387c263f5b28c05e, type: 3}
   blockDamage1Feu: {fileID: -669169337684323110, guid: 35ea23bd621ef5946845e28db5e445e7, type: 3}
