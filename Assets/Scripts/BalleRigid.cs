@@ -4,6 +4,7 @@ using System.Collections;
 using Unity.Netcode;
 using TMPro;
 using Unity.Netcode.Components;// pour accéder aux propriétés du NetworkTransform
+using UnityEngine.SceneManagement;
 
 public class BalleRigid : NetworkBehaviour
 {
@@ -106,11 +107,11 @@ public class BalleRigid : NetworkBehaviour
 
    public void Joueur1Gagne() 
    {
-
+    SceneManager.LoadScene("BleuGagne");
    }
 
     public void Joueur2Gagne() 
    {
-
+    SceneManager.LoadScene("RougeGagne");
    }
 }
