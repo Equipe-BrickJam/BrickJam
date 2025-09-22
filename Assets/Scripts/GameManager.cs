@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement; // namespace pour la gestion des scènes
 public class GameManager : NetworkBehaviour
 {
     public GameObject Player1;
-    public GameObject Player2;
+    public GameObject Player2; 
+    
+    public GameObject panelDeConnexion;
 
     public NetworkObject boutonHote;
     public NetworkObject boutonClient;
@@ -48,24 +50,27 @@ public class GameManager : NetworkBehaviour
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
             // Si je suis client j'affiche le panneua d'attente 
             //NavigationManager.singleton.AfficheAttenteServeur();
-            if (IsServer)
-            {
-                boutonHote.Despawn(true);
-            }
-       }
-       else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
+            //if (IsServer)
+            //{
+            //    boutonHote.Despawn(true);
+            //}
+            panelDeConnexion.SetActive(false);
+
+        }
+        else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
        {
            GameObject nouveauJoueur = Instantiate(Player2);
            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
             //NavigationManager.singleton.AffichePanelServeurPartie();
-            if (IsServer)
-            {
-                boutonClient.Despawn(true);
-            }
-            
-       }
- 
-       }
+            //if (IsServer)
+            //{
+            //    boutonClient.Despawn(true);
+            //}
+
+
+        }
+
+    }
 
     void Update()
     {
@@ -110,15 +115,19 @@ public class GameManager : NetworkBehaviour
    public void LanceCommeHote() // Public pour être appeler de l'extérieur (par le bouton Hôte)
    {
        NetworkManager.Singleton.StartHost(); // Fonction du NetworkManager pour démarrer une partie comme hôte
-   }
+        panelDeConnexion.SetActive(false);
 
-   // Fonction appelée pour le bouton qui permet de se connecter comme client
-   public void LanceCommeClient() // Public pour être appeler de l'extérieur (par le bouton Client)
+    }
+
+    // Fonction appelée pour le bouton qui permet de se connecter comme client
+    public void LanceCommeClient() // Public pour être appeler de l'extérieur (par le bouton Client)
    {
        NetworkManager.Singleton.StartClient(); // Fonction du NetworkManager pour démarrer une partie comme client
-   }
+        panelDeConnexion.SetActive(false);
+
+    }
 
 
-   //changement de scene
-   //NetworkManager Singleton.SceneManager Loadscene("Jeu")
+    //changement de scene
+    //NetworkManager Singleton.SceneManager Loadscene("Jeu")
 }
