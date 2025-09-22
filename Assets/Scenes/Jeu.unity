@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -179.857
       objectReference: {fileID: 0}
+    - target: {fileID: 2110274129794645639, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
+      propertyPath: vitesseDeplacement
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2355517826306107890, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
       propertyPath: m_Material
       value: 
@@ -3595,11 +3599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2110274129794645639, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
       propertyPath: vitesseMaximale
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2110274129794645639, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
       propertyPath: vitesseDeplacement
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5108870692140312196, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
       propertyPath: m_Name
