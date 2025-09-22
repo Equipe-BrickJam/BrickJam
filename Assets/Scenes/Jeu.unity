@@ -1034,9 +1034,8 @@ GameObject:
   - component: {fileID: 971781284}
   - component: {fileID: 971781283}
   - component: {fileID: 971781282}
-  - component: {fileID: 971781285}
   m_Layer: 5
-  m_Name: Client
+  m_Name: ButtonClient
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1049,13 +1048,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971781280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.326, y: 2.326, z: 2.326}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1261451554}
-  m_Father: {fileID: 1348308784}
+  m_Father: {fileID: 1443639731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1156,31 +1155,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971781280}
   m_CullTransparentMesh: 1
---- !u!114 &971781285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971781280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 2026279329
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1 &1113313602
 GameObject:
   m_ObjectHideFlags: 0
@@ -1853,9 +1827,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 971781281}
   - {fileID: 1858425074}
-  - {fileID: 2092185397}
+  - {fileID: 1443639731}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2094,6 +2067,43 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b273f565f5c95a4bad028f37a8a329f, type: 3}
+--- !u!1 &1443639730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1443639731}
+  m_Layer: 5
+  m_Name: PanelConnexion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1443639731
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443639730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 971781281}
+  - {fileID: 2092185397}
+  m_Father: {fileID: 1348308784}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1467583062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2359,8 +2369,9 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   Player1: {fileID: 5108870692140312196, guid: 548b9c046db694c3eaa209d057a33805, type: 3}
   Player2: {fileID: 8693975779874012603, guid: f5c961eda33964976b9aca1e8daf93af, type: 3}
-  boutonHote: {fileID: 2092185401}
-  boutonClient: {fileID: 971781285}
+  panelDeConnexion: {fileID: 1443639730}
+  boutonHote: {fileID: 0}
+  boutonClient: {fileID: 0}
   ballPrefab: {fileID: 1523830429374756501, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
   balleInstance: {fileID: 0}
 --- !u!4 &1556087034
@@ -2702,14 +2713,14 @@ RectTransform:
   m_GameObject: {fileID: 1858425073}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5775, y: 1.5775, z: 1.5775}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1348308784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -363, y: 267}
+  m_AnchoredPosition: {x: -593, y: 451}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1858425075
@@ -3135,7 +3146,6 @@ GameObject:
   - component: {fileID: 2092185400}
   - component: {fileID: 2092185399}
   - component: {fileID: 2092185398}
-  - component: {fileID: 2092185401}
   m_Layer: 5
   m_Name: ButtonHote
   m_TagString: Untagged
@@ -3150,13 +3160,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092185396}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.2994, y: 2.2994, z: 2.2994}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1113313603}
-  m_Father: {fileID: 1348308784}
+  m_Father: {fileID: 1443639731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3257,31 +3267,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092185396}
   m_CullTransparentMesh: 1
---- !u!114 &2092185401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092185396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Netcode.Runtime::Unity.Netcode.NetworkObject
-  GlobalObjectIdHash: 148221287
-  InScenePlacedSourceGlobalObjectIdHash: 0
-  DeferredDespawnTick: 0
-  Ownership: 1
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 0
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
-  SyncOwnerTransformWhenParented: 1
-  AllowOwnerToParent: 0
 --- !u!1001 &468639461127868828
 PrefabInstance:
   m_ObjectHideFlags: 0
