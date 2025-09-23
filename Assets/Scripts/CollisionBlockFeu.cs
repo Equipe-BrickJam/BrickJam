@@ -16,6 +16,10 @@ public class CollisionBlockFeu : NetworkBehaviour
     public Sprite blockDamage2Feu;
 
     private SpriteRenderer spriteRenderer;
+
+    //Compteur collision de la balle: NetworkVariable initialisé à 0
+    private NetworkVariable<int> nombreCollisionsBalle = new NetworkVariable<int>(0);
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,6 +28,18 @@ public class CollisionBlockFeu : NetworkBehaviour
 
         //S'assurer que la sprite initiale est charg�e en premier
         spriteRenderer.sprite = blocInitialFeu;
+
+        // Quand la valeur des collisions change, on met à jour le sprite localement (clients et serveur)
+        nombreCollisionsBalle.OnValueChanged += (oldValue, newValue) =>
+        {
+            if (newValue == 1){
+                spriteRenderer.sprite = blockDamage1Feu;
+            }
+            else if (newValue == 2)
+            {
+                spriteRenderer.sprite = blockDamage2Feu;
+            }
+        };
     }
 
     // Update is called once per frame
@@ -37,26 +53,11 @@ public class CollisionBlockFeu : NetworkBehaviour
         if (infoCollision.gameObject.CompareTag("BalleJoueur2"))
         {
             //Le nombre de fois augmente de 1
-            NbFois++;
+            nombreCollisionsBalle.Value++;
 
-            if (NbFois == 1)
+            if (nombreCollisionsBalle.Value >= 3)
             {
-                //On change le sprite du blockInitial � blockDamage1
-                spriteRenderer.sprite = blockDamage1Feu;
-            }
-            else if (NbFois == 2)
-            {
-                //On change le sprite du blockInitial � blockDamage1
-                spriteRenderer.sprite = blockDamage2Feu;
-            }
-            else if (NbFois == 3)
-            {
-                //Détruit l'objet
-                if (IsServer)
-                {
-                    NetworkObject.Despawn(true);
-                }
-
+                GetComponent<NetworkObject>().Despawn(true);
             }
         }
     }
