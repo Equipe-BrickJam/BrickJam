@@ -11,9 +11,9 @@ public class BalleRigid : NetworkBehaviour
     public static BalleRigid instance; // Singleton
     float maxDistanceX = 25f; // moitié de la largeur de la table, pour savoir si un but est compté
     [SerializeField] private float nombreDeBonds; //compte du nombre de bonds de la balle // Servira plus tard
-    [SerializeField] private float maxSpeed; // si on veut limiter la vitesse max de la balle (inutilisé)
     public string tagJoueur1 = "BalleJoueur1";
     public string tagJoueur2 = "BalleJoueur2";
+    public float vitesseDepart = 10f;
 
     private void Awake()
     {
@@ -81,15 +81,14 @@ public class BalleRigid : NetworkBehaviour
        yield return new WaitForSecondsRealtime(1f);
        GetComponent<NetworkTransform>().Interpolate = true;
 
-       System.Random random = new System.Random();
-       float aleaX = random.Next(0, 2) == 0 ? -10 : 10; //  opérateur ternaire
-       float aleaZ = random.Next(0, 2) == 0 ? -10 : 10;
+       //La balle peut partir dans tout les angles
+       float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
 
-       GetComponent<Rigidbody2D>().AddForce(new Vector2(aleaX, aleaZ), ForceMode2D.Impulse);
+       Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+       GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
+    }
 
-   }
-
-   private void OnCollisionEnter2D(Collision2D infoCollision) 
+    private void OnCollisionEnter2D(Collision2D infoCollision) 
    {
       //Si elle rentre en collision avec un blouclier OU un block
       if(infoCollision.gameObject.tag == "Joueur1")
