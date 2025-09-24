@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement; // namespace pour la gestion des scènes
 public class GameManager : NetworkBehaviour
 {
     public GameObject Player1;
-    public GameObject Player2; 
-    
+    public GameObject Player2;
+    public GameObject menu;
     public GameObject panelDeConnexion;
 
     public NetworkObject boutonHote;
@@ -80,6 +80,8 @@ public class GameManager : NetworkBehaviour
         if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
         {
           NouvellePartie();
+          menu.SetActive(false); // On désactive le canvas ( menu du début ) pour ne plus voir le fond et le titre
+            
         }
     }
 

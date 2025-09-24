@@ -15,6 +15,11 @@ public class BalleRigid : NetworkBehaviour
     public string tagJoueur2 = "BalleJoueur2";
     public float vitesseDepart = 10f;
 
+    public Sprite balleInitial;
+    public Sprite balleRouge;
+    public Sprite balleBleu;
+    private SpriteRenderer spriteRenderer;
+
     private void Awake()
     {
         if (instance == null)
@@ -28,7 +33,11 @@ public class BalleRigid : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Chercher le sprite renderer une seule fois dans le start au lieu du update
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
+        //Initie le sprite de la balle en premier
+        spriteRenderer.sprite = balleInitial;
     }
 
     // Update is called once per frame
@@ -95,13 +104,15 @@ public class BalleRigid : NetworkBehaviour
       {
         gameObject.tag = tagJoueur1;
         Debug.Log("Tag changed to: " + gameObject.tag);
-      }
+        spriteRenderer.sprite = balleBleu; // Change la couleur de la balle en bleu pour le joueur 1
+       }
 
       else if (infoCollision.gameObject.tag == "Joueur2") 
       {
         gameObject.tag = tagJoueur2;
         Debug.Log("Tag changed to: " + gameObject.tag);
-      }
+        spriteRenderer.sprite = balleRouge; // Change la couleur de la balle en rouge pour le joueur 2
+       }
    }
 
    public void Joueur1Gagne() 
