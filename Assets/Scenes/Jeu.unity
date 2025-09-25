@@ -3852,6 +3852,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7008235247261616836, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7076253800072728576, guid: 5bcd73b1ad47c4c0e9c307c2b37ac409, type: 3}
       propertyPath: SyncScaleX
       value: 0

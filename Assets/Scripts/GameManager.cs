@@ -74,14 +74,14 @@ public class GameManager : NetworkBehaviour
 
     void Update()
     {
-        if (!IsHost) return;
+        //if (!IsHost) return;
         if (partieEnCours) return;
 
         if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
         {
           NouvellePartie();
           menu.SetActive(false); // On désactive le canvas ( menu du début ) pour ne plus voir le fond et le titre
-            
+
         }
     }
 

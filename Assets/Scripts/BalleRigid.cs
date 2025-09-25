@@ -96,24 +96,35 @@ public class BalleRigid : NetworkBehaviour
        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
        GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
     }
-
-    private void OnCollisionEnter2D(Collision2D infoCollision) 
-   {
-      //Si elle rentre en collision avec un blouclier OU un block
-      if(infoCollision.gameObject.tag == "Joueur1")
+    
+    [ClientRpc]
+    private void ChangeSpriteClientRpc(int spriteType)
+    {
+      switch (spriteType)
       {
-        gameObject.tag = tagJoueur1;
-        Debug.Log("Tag changed to: " + gameObject.tag);
-        spriteRenderer.sprite = balleBleu; // Change la couleur de la balle en bleu pour le joueur 1
-       }
+        case 0: spriteRenderer.sprite = balleInitial; break;
+        case 1: spriteRenderer.sprite = balleBleu; break;
+        case 2: spriteRenderer.sprite = balleRouge; break;
+      }
+    }
 
-      else if (infoCollision.gameObject.tag == "Joueur2") 
-      {
-        gameObject.tag = tagJoueur2;
-        Debug.Log("Tag changed to: " + gameObject.tag);
-        spriteRenderer.sprite = balleRouge; // Change la couleur de la balle en rouge pour le joueur 2
-       }
-   }
+    private void OnCollisionEnter2D(Collision2D infoCollision)
+  {
+    //Si elle rentre en collision avec un blouclier OU un block
+    if (infoCollision.gameObject.tag == "Joueur1")
+    {
+      gameObject.tag = tagJoueur1;
+      Debug.Log("Tag changed to: " + gameObject.tag);
+      ChangeSpriteClientRpc(1); // Change la couleur de la balle en bleu pour le joueur 1
+    }
+
+    else if (infoCollision.gameObject.tag == "Joueur2")
+    {
+      gameObject.tag = tagJoueur2;
+      Debug.Log("Tag changed to: " + gameObject.tag);
+      ChangeSpriteClientRpc(2); // Change la couleur de la balle en rouge pour le joueur 2
+    }
+  }
 
    public void Joueur1Gagne() 
    {
