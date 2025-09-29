@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class BalleRigid : NetworkBehaviour
 {
     public static BalleRigid instance; // Singleton
-    float maxDistanceX = 25f; // moitié de la largeur de la table, pour savoir si un but est compté
+    float maxDistanceY = 4.7f; // moitié de la largeur de la table, pour savoir si un but est compté
     [SerializeField] private float nombreDeBonds; //compte du nombre de bonds de la balle // Servira plus tard
     public string tagJoueur1 = "BalleJoueur1";
     public string tagJoueur2 = "BalleJoueur2";
@@ -19,6 +19,10 @@ public class BalleRigid : NetworkBehaviour
     public Sprite balleRouge;
     public Sprite balleBleu;
     private SpriteRenderer spriteRenderer;
+
+    public bool blocsGlaceDetruits = false;
+    public bool blocsFeuDetruits = false;
+
 
     private void Awake()
     {
@@ -42,97 +46,101 @@ public class BalleRigid : NetworkBehaviour
 
     // Update is called once per frame
     void Update()
-  {
-    if (!IsServer)
     {
-      return;
-    }
-    if (!GameManager.instance.partieEnCours) return; // Il faudra créer cette variable dans le GameManager
+        if (!IsServer)
+        {
+            return;
+        }
+        if (!GameManager.instance.partieEnCours) return;
 
-    //but client
-    if (transform.position.x < -maxDistanceX)
-    {
-      // Ici, il faudra aussi augmenter le score du joueur
-      LanceBalleMilieu();
+        //but client
+        if (transform.position.y < -maxDistanceY)
+        {
+            //LanceBalleMilieu();
+        }
+
+        //but serveur (hôte)
+        if (transform.position.y > maxDistanceY)
+        {
+            //LanceBalleMilieu();
+        }
+
+        //if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
+        //****************TEST****************//
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            blocsGlaceDetruits = true;
+            Pointage.instance.AjouterPointage(false, 1);
+        }
+
+        //else if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
+        //****************TEST****************//
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            blocsFeuDetruits = true;
+            Pointage.instance.AjouterPointage(true, 1);
+        }
     }
 
-    //but serveur (hôte)
-    if (transform.position.x > maxDistanceX)
-    {
-      // Ici, il faudra aussi augmenter le score du joueur
-      LanceBalleMilieu();
-    }
-
-    if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
-    {
-      Joueur1Gagne();
-    }
-
-    else if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0) 
-    {
-      Joueur2Gagne();
-    }
-  }
-
-  public void LanceBalleMilieu()
+    public void LanceBalleMilieu()
     {
         nombreDeBonds = 0;
         GetComponent<NetworkTransform>().Interpolate = false;
         transform.position = new Vector2(0f, 0.5f);
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
-        if (GameManager.instance.partieTerminee) return; // Il faudra créer cette variable dans le GameManager
+        if (GameManager.instance.partieTerminee) return;
         StartCoroutine(NouvelleBalle());
     }
-   
-      IEnumerator NouvelleBalle()
-   {
-       yield return new WaitForSecondsRealtime(1f);
-       GetComponent<NetworkTransform>().Interpolate = true;
 
-       //La balle peut partir dans tout les angles
-       float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+    IEnumerator NouvelleBalle()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        GetComponent<NetworkTransform>().Interpolate = true;
 
-       Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-       GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
+        //La balle peut partir dans tout les angles
+        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
     }
-    
+
     [ClientRpc]
     private void ChangeSpriteClientRpc(int spriteType)
     {
-      switch (spriteType)
-      {
-        case 0: spriteRenderer.sprite = balleInitial; break;
-        case 1: spriteRenderer.sprite = balleBleu; break;
-        case 2: spriteRenderer.sprite = balleRouge; break;
-      }
+        switch (spriteType)
+        {
+            case 0: spriteRenderer.sprite = balleInitial; break;
+            case 1: spriteRenderer.sprite = balleBleu; break;
+            case 2: spriteRenderer.sprite = balleRouge; break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
-  {
-    //Si elle rentre en collision avec un blouclier OU un block
-    if (infoCollision.gameObject.tag == "Joueur1")
     {
-      gameObject.tag = tagJoueur1;
-      Debug.Log("Tag changed to: " + gameObject.tag);
-      ChangeSpriteClientRpc(1); // Change la couleur de la balle en bleu pour le joueur 1
+        //Si elle rentre en collision avec un blouclier OU un block
+        if (infoCollision.gameObject.tag == "Joueur1")
+        {
+            gameObject.tag = tagJoueur1;
+            Debug.Log("Tag changed to: " + gameObject.tag);
+            ChangeSpriteClientRpc(1); // Change la couleur de la balle en bleu pour le joueur 1
+        }
+
+        else if (infoCollision.gameObject.tag == "Joueur2")
+        {
+            gameObject.tag = tagJoueur2;
+            Debug.Log("Tag changed to: " + gameObject.tag);
+            ChangeSpriteClientRpc(2); // Change la couleur de la balle en rouge pour le joueur 2
+        }
     }
 
-    else if (infoCollision.gameObject.tag == "Joueur2")
+    public void Joueur1Gagne()
     {
-      gameObject.tag = tagJoueur2;
-      Debug.Log("Tag changed to: " + gameObject.tag);
-      ChangeSpriteClientRpc(2); // Change la couleur de la balle en rouge pour le joueur 2
+        SceneManager.LoadScene("BleuGagne");
     }
-  }
 
-   public void Joueur1Gagne() 
-   {
-    SceneManager.LoadScene("BleuGagne");
-   }
-
-    public void Joueur2Gagne() 
-   {
-    SceneManager.LoadScene("RougeGagne");
-   }
+    public void Joueur2Gagne()
+    {
+        SceneManager.LoadScene("RougeGagne");
+    }
 }

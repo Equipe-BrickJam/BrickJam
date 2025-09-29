@@ -10,23 +10,23 @@ public class Joueur : NetworkBehaviour
 
     private Vector2 velocitePerso;
 
-   
+
     // Fontion semblale au start, mais pour les objets réseaux et s'éxécute avant
-   public override void OnNetworkSpawn()
-   {
-       base.OnNetworkSpawn();
-      
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
 
 
-       if (IsServer)
-       {
-           transform.position = new Vector3(0f, -4.49f, 0f); //position à ajuster selon votre jeu
-       }
-       else
-       {
-           transform.position = new Vector3(0f, 4.49f, 0f); //position à ajuster selon votre jeu
-       }
-   }
+
+        if (IsServer)
+        {
+            transform.position = new Vector3(0f, -4.49f, 0f); //position à ajuster selon votre jeu
+        }
+        else
+        {
+            transform.position = new Vector3(0f, 4.49f, 0f); //position à ajuster selon votre jeu
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,12 +37,12 @@ public class Joueur : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!IsOwner) return;
-       
+        if (!IsOwner) return;
+
         Mouvement();
     }
 
-    private void Mouvement() 
+    private void Mouvement()
     {
         if (Input.GetKey(KeyCode.D)) //Déplacement vers la droite
         {
@@ -59,6 +59,6 @@ public class Joueur : NetworkBehaviour
             velocitePerso.x = 0f;
         }
 
-         GetComponent<Rigidbody2D>().linearVelocity = velocitePerso;
+        GetComponent<Rigidbody2D>().linearVelocity = velocitePerso;
     }
 }

@@ -13,41 +13,42 @@ public class GameManager : NetworkBehaviour
     public NetworkObject boutonClient;
 
     public static GameManager instance;// Singleton pour parler au GameManager de n'importe où
-    public bool partieEnCours{ private set; get; } //permet de savoir si une partie est en cours
-    public bool partieTerminee{ private set; get; } // permet de savoir si une partie est terminée
+    public bool partieEnCours { private set; get; } //permet de savoir si une partie est en cours
+    public bool partieTerminee { private set; get; } // permet de savoir si une partie est terminée
     [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
     public BalleRigid balleInstance;
 
 
-// Création du singleton si nécessaire
+    // Création du singleton si nécessaire
     void Awake()
-   {
-       if (instance == null)
-       {
-           instance = this;
-           //dont destroyonload
-       }
-       else
-       {
-           Destroy(gameObject);
-       }
+    {
+        if (instance == null)
+        {
+            instance = this;
+            //dont destroyonload
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         // Abonnement au callback OnClientConnectedCallback qui lancera la fonction OnNouveauClientConnecte.
-       NetworkManager.Singleton.OnClientConnectedCallback += OnNouveauClientConnecte;
-   }
+        NetworkManager.Singleton.OnClientConnectedCallback += OnNouveauClientConnecte;
+    }
     public void OnNouveauClientConnecte(ulong obj)
     {
-       if (!IsServer) 
-       {
+        if (!IsServer)
+        {
 
-        // Si je suis client j'affiche le panneua d'attente 
-        //NavigationManager.singleton.AfficheAttenteClient();
-        
-        return;}
+            // Si je suis client j'affiche le panneua d'attente 
+            //NavigationManager.singleton.AfficheAttenteClient();
 
-       if (NetworkManager.Singleton.ConnectedClients.Count == 1) 
-       {
-           GameObject nouveauJoueur = Instantiate(Player1);
-           nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+            return;
+        }
+
+        if (NetworkManager.Singleton.ConnectedClients.Count == 1)
+        {
+            GameObject nouveauJoueur = Instantiate(Player1);
+            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
             // Si je suis client j'affiche le panneua d'attente 
             //NavigationManager.singleton.AfficheAttenteServeur();
             //if (IsServer)
@@ -58,9 +59,9 @@ public class GameManager : NetworkBehaviour
 
         }
         else if (NetworkManager.Singleton.ConnectedClients.Count == 2)
-       {
-           GameObject nouveauJoueur = Instantiate(Player2);
-           nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
+        {
+            GameObject nouveauJoueur = Instantiate(Player2);
+            nouveauJoueur.GetComponent<NetworkObject>().SpawnWithOwnership(obj);
             //NavigationManager.singleton.AffichePanelServeurPartie();
             //if (IsServer)
             //{
@@ -79,14 +80,14 @@ public class GameManager : NetworkBehaviour
 
         if (NetworkManager.Singleton.ConnectedClientsList.Count >= 2)
         {
-          NouvellePartie();
-          menu.SetActive(false); // On désactive le canvas ( menu du début ) pour ne plus voir le fond et le titre
+            NouvellePartie();
+            menu.SetActive(false); // On désactive le canvas ( menu du début ) pour ne plus voir le fond et le titre
 
         }
     }
 
-    
-   
+
+
 
     public void NouvellePartie()
     {
@@ -103,28 +104,28 @@ public class GameManager : NetworkBehaviour
         }
 
         BalleRigid.instance.LanceBalleMilieu();
-   }
+    }
 
     // Fonction appelée par le ScoreManager pour terminer la partie (nous l'utilserons plus tard)
-   public void FinPartie()
-   {
-       partieTerminee = true;
-   }
+    public void FinPartie()
+    {
+        partieTerminee = true;
+    }
 
-    
 
-   // Fonction appelée pour le bouton qui permet de se connecter comme hôte
-   public void LanceCommeHote() // Public pour être appeler de l'extérieur (par le bouton Hôte)
-   {
-       NetworkManager.Singleton.StartHost(); // Fonction du NetworkManager pour démarrer une partie comme hôte
+
+    // Fonction appelée pour le bouton qui permet de se connecter comme hôte
+    public void LanceCommeHote() // Public pour être appeler de l'extérieur (par le bouton Hôte)
+    {
+        NetworkManager.Singleton.StartHost(); // Fonction du NetworkManager pour démarrer une partie comme hôte
         panelDeConnexion.SetActive(false);
 
     }
 
     // Fonction appelée pour le bouton qui permet de se connecter comme client
     public void LanceCommeClient() // Public pour être appeler de l'extérieur (par le bouton Client)
-   {
-       NetworkManager.Singleton.StartClient(); // Fonction du NetworkManager pour démarrer une partie comme client
+    {
+        NetworkManager.Singleton.StartClient(); // Fonction du NetworkManager pour démarrer une partie comme client
         panelDeConnexion.SetActive(false);
 
     }
