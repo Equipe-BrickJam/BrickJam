@@ -124,8 +124,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.18, z: 0}
-  m_LocalScale: {x: 0.10781305, y: 0.10781305, z: 0.10781305}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: -0.01, y: -0.01, z: -0.01}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4534567741870422373}
   m_Father: {fileID: 0}
@@ -294,6 +294,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BalleRigid
   ShowTopMostFoldoutHeaderGroup: 1
+  pointage: {fileID: 0}
+  Game: {fileID: 0}
   nombreDeBonds: 0
   tagJoueur1: BalleJoueur1
   tagJoueur2: BalleJoueur2
@@ -303,8 +305,12 @@ MonoBehaviour:
   balleBleu: {fileID: 7404130602565552872, guid: 719e3e38cec83664faa127f66942e73a, type: 3}
   blocsGlaceDetruits: 0
   blocsFeuDetruits: 0
+  pointageServeur: 0
+  pointageClient: 0
   sonRebond: {fileID: 8300000, guid: 99618e23e624d7143a1da8152162cbd9, type: 3}
   sonSwitchCouleur: {fileID: 8300000, guid: 4290126698be5234488706e1149aa795, type: 3}
+  textePointageBleu: {fileID: 0}
+  textePointageRouge: {fileID: 0}
 --- !u!212 &-1870392768772485180
 SpriteRenderer:
   m_ObjectHideFlags: 0

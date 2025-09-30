@@ -28,9 +28,9 @@ public class BalleRigid : NetworkBehaviour
     public bool blocsGlaceDetruits = false;
     public bool blocsFeuDetruits = false;
 
-    public float pointageServeur;
+    public float pointageServeur; // pointage Bleu
 
-    public float pointageClient;
+    public float pointageClient; // pointage Rouge
 
     //Variable du son
     public AudioClip sonRebond;
