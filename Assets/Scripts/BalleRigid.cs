@@ -158,7 +158,7 @@ public class BalleRigid : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         //Si la balle rentre en collision avec les extrémités du bas et du haut, elle reviens au millieu
-        if(other.gameObject.tag == "Limite")
+        if (other.gameObject.tag == "Limite")
         {
             // Stop la balle
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
@@ -169,7 +169,9 @@ public class BalleRigid : NetworkBehaviour
             // On projeter de facon random
 
             // Attend un petit délai avant de relancer la balle (optionnel)
-            StartCoroutine(LancerBalleApresDelai(0.5f));
+            //StartCoroutine(LancerBalleApresDelai(0.5f));
+            
+            StartCoroutine(NouvelleBalle());
         }
     }
 

@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Joueur
   ShowTopMostFoldoutHeaderGroup: 1
-  vitesseDeplacement: 5
+  vitesseDeplacement: 6
   vitesseMaximale: 3
 --- !u!61 &1525442399433754154
 BoxCollider2D:

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Joueur
   ShowTopMostFoldoutHeaderGroup: 1
-  vitesseDeplacement: 5
+  vitesseDeplacement: 6
   vitesseMaximale: 3
 --- !u!50 &-6618750129039105177
 Rigidbody2D:
