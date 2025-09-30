@@ -122,14 +122,24 @@ public class GameManager : NetworkBehaviour
         {
             var blocGlaceCopie = Instantiate(blocGlaceSpawn);
             blocGlaceCopie.GetComponent<NetworkObject>().Spawn();
-            blocGlaceCopie.SetActive(true);
+            blocGlaceCopie.SetActive(true); 
+
+            if(blocGlaceCopie == null) {  
+                var blocGlaceCopie2 = Instantiate(blocGlaceSpawn);
+                blocGlaceCopie2.GetComponent<NetworkObject>().Spawn(); 
+            }
         }
 
         foreach (var blocFeuSpawn in blocFeuPrefab)
         {
             var blocFeuCopie = Instantiate(blocFeuSpawn);
-            blocFeuCopie.GetComponent<NetworkObject>().Spawn();
-            blocFeuCopie.SetActive(true);
+            blocFeuCopie.GetComponent<NetworkObject>().Spawn(); 
+            blocFeuCopie.SetActive(true);           
+
+            if(blocFeuCopie == null) {
+                var blocFeuCopie2 = Instantiate(blocFeuSpawn);
+                blocFeuCopie2.GetComponent<NetworkObject>().Spawn();            
+            }          
         }
 
         BalleRigid.instance.LanceBalleMilieu();

@@ -84,13 +84,13 @@ public class BalleRigid : NetworkBehaviour
             //LanceBalleMilieu();
         }
 
-        Score();
+        ScoreRpc();
     }
-    public void Score()
+    [Rpc(SendTo.Everyone)]
+    public void ScoreRpc()
     {
-        //if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
         //****************TEST****************//
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G) || GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
         {
             blocsGlaceDetruits = true;
             Pointage.instance.AjouterPointage(false, 1);
@@ -98,9 +98,8 @@ public class BalleRigid : NetworkBehaviour
             Game.GetComponent<GameManager>().NouvellePartie();
         }
 
-        //else if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
         //****************TEST****************//
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) || GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
         {
             blocsFeuDetruits = true;
             Pointage.instance.AjouterPointage(true, 1);

@@ -31,10 +31,9 @@ public class Pointage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
     //M�thode pour ajouter des points
-
     public void AjouterPointage(bool isServer, int points)
     {
         if (GameManager.instance.partieEnCours && !GameManager.instance.partieTerminee)
