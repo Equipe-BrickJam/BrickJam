@@ -18,6 +18,10 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
     public BalleRigid balleInstance;
 
+    //Variable du son
+    public AudioClip BreakingGlass;
+    private AudioSource audioSource;
+
 
     // Création du singleton si nécessaire
     void Awake()
@@ -33,6 +37,12 @@ public class GameManager : NetworkBehaviour
         }
         // Abonnement au callback OnClientConnectedCallback qui lancera la fonction OnNouveauClientConnecte.
         NetworkManager.Singleton.OnClientConnectedCallback += OnNouveauClientConnecte;
+    }
+
+    private void Start()
+    {
+        // l'audioSource viens chercher le component du block 
+        audioSource = GetComponent<AudioSource>();
     }
     public void OnNouveauClientConnecte(ulong obj)
     {
@@ -117,6 +127,8 @@ public class GameManager : NetworkBehaviour
     // Fonction appelée pour le bouton qui permet de se connecter comme hôte
     public void LanceCommeHote() // Public pour être appeler de l'extérieur (par le bouton Hôte)
     {
+        // Le son du brise glasse joue
+        audioSource.PlayOneShot(BreakingGlass);
         NetworkManager.Singleton.StartHost(); // Fonction du NetworkManager pour démarrer une partie comme hôte
         panelDeConnexion.SetActive(false);
 
@@ -125,6 +137,8 @@ public class GameManager : NetworkBehaviour
     // Fonction appelée pour le bouton qui permet de se connecter comme client
     public void LanceCommeClient() // Public pour être appeler de l'extérieur (par le bouton Client)
     {
+        // Le son du brise glasse joue
+        audioSource.PlayOneShot(BreakingGlass);
         NetworkManager.Singleton.StartClient(); // Fonction du NetworkManager pour démarrer une partie comme client
         panelDeConnexion.SetActive(false);
 

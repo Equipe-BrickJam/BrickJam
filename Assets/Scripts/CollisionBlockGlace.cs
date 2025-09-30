@@ -15,6 +15,11 @@ public class CollisionBlockGlace : NetworkBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+
+    //Variable du son
+    public AudioClip BreakingGlass;
+    private AudioSource audioSource;
+
     //Compteur collision de la balle: NetworkVariable initialisé à 0
     private NetworkVariable<int> nombreCollisionsBalle = new NetworkVariable<int>(0);
 
@@ -24,6 +29,10 @@ public class CollisionBlockGlace : NetworkBehaviour
     {
         //Chercher le sprite renderer une seule fois dans le start au lieu du update
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+
+        // l'audioSource viens chercher le component du block 
+        audioSource = GetComponent<AudioSource>();
 
         //S'assurer que la sprite initiale est charg�e en premier
         spriteRenderer.sprite = blocInitialGlace;
@@ -51,6 +60,8 @@ public class CollisionBlockGlace : NetworkBehaviour
         {
             //Le nombre de fois augmente de 1
             nombreCollisionsBalle.Value++;
+            // Le son du brise glasse joue
+            audioSource.PlayOneShot(BreakingGlass);
 
             if (nombreCollisionsBalle.Value >= 3)
             {

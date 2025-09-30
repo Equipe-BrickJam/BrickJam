@@ -24,6 +24,11 @@ public class BalleRigid : NetworkBehaviour
     public bool blocsFeuDetruits = false;
 
 
+    //Variable du son
+    public AudioClip sonRebond;
+    public AudioClip sonSwitchCouleur;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         if (instance == null)
@@ -39,6 +44,9 @@ public class BalleRigid : NetworkBehaviour
     {
         //Chercher le sprite renderer une seule fois dans le start au lieu du update
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // l'audioSource viens chercher le component du block 
+        audioSource = GetComponent<AudioSource>();
 
         //Initie le sprite de la balle en premier
         spriteRenderer.sprite = balleInitial;
@@ -84,7 +92,7 @@ public class BalleRigid : NetworkBehaviour
 
     public void LanceBalleMilieu()
     {
-        nombreDeBonds = 0;
+        //nombreDeBonds = 0;
         GetComponent<NetworkTransform>().Interpolate = false;
         transform.position = new Vector2(0f, 0.5f);
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
@@ -118,20 +126,67 @@ public class BalleRigid : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
     {
+        //Si elle rentre en collision avec un block
+        if(infoCollision.gameObject.tag == "BlocFeu" || infoCollision.gameObject.tag == "BlocGlace")
+        {
+            // On fait jouer le son du rebond
+            audioSource.PlayOneShot(sonRebond);
+
+        }
+
+
         //Si elle rentre en collision avec un blouclier OU un block
         if (infoCollision.gameObject.tag == "Joueur1")
         {
             gameObject.tag = tagJoueur1;
-            Debug.Log("Tag changed to: " + gameObject.tag);
             ChangeSpriteClientRpc(1); // Change la couleur de la balle en bleu pour le joueur 1
+            
+            // Le son de la balle qui change de couleur
+            audioSource.PlayOneShot(sonSwitchCouleur);
         }
 
         else if (infoCollision.gameObject.tag == "Joueur2")
         {
             gameObject.tag = tagJoueur2;
-            Debug.Log("Tag changed to: " + gameObject.tag);
             ChangeSpriteClientRpc(2); // Change la couleur de la balle en rouge pour le joueur 2
+
+            // Le son de la balle qui change de couleur
+            audioSource.PlayOneShot(sonSwitchCouleur);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //Si la balle rentre en collision avec les extrémités du bas et du haut, elle reviens au millieu
+        if(other.gameObject.tag == "Limite")
+        {
+            // Stop la balle
+            GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+
+            // Remet à la position de départ
+            transform.position = new Vector2(0f, 0.5f);
+
+            // On projeter de facon random
+
+            // Attend un petit délai avant de relancer la balle (optionnel)
+            StartCoroutine(LancerBalleApresDelai(0.5f));
+        }
+    }
+
+    private IEnumerator LancerBalleApresDelai(float delai)
+    {
+        yield return new WaitForSeconds(delai);
+
+        // Crée une direction aléatoire X et Y (évite les 0)
+        float x = UnityEngine.Random.Range(-1f, 1f);
+        float y = UnityEngine.Random.Range(0.5f, 1f); // vers le haut seulement
+
+        Vector2 direction = new Vector2(x, y).normalized;
+
+        float force = 5f; // Ajuste la vitesse ici
+
+        // Applique la vitesse
+        GetComponent<Rigidbody2D>().linearVelocity = direction * force;
     }
 
     public void Joueur1Gagne()

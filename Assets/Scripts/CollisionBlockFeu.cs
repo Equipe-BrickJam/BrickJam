@@ -9,11 +9,13 @@ public class CollisionBlockFeu : NetworkBehaviour
 {
     public GameObject balle;
 
-    private int NbFois = 0; //Le nombre de fois que la balle touche le block
-
     public Sprite blocInitialFeu;
     public Sprite blockDamage1Feu;
     public Sprite blockDamage2Feu;
+
+    //Variable du son
+    public AudioClip BreakingGlass;
+    private AudioSource audioSource;
 
     private SpriteRenderer spriteRenderer;
 
@@ -26,6 +28,9 @@ public class CollisionBlockFeu : NetworkBehaviour
         //Chercher le sprite renderer une seule fois dans le start au lieu du update
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        // l'audioSource viens chercher le component du block 
+        audioSource = GetComponent<AudioSource>();
+
         //S'assurer que la sprite initiale est charg�e en premier
         spriteRenderer.sprite = blocInitialFeu;
 
@@ -33,11 +38,14 @@ public class CollisionBlockFeu : NetworkBehaviour
         nombreCollisionsBalle.OnValueChanged += (oldValue, newValue) =>
         {
             if (newValue == 1){
+                // Le sprite change en block dommagé niveau 1
                 spriteRenderer.sprite = blockDamage1Feu;
             }
             else if (newValue == 2)
             {
+                // Le sprite change en block dommagé niveau 2
                 spriteRenderer.sprite = blockDamage2Feu;
+
             }
         };
     }
@@ -54,6 +62,8 @@ public class CollisionBlockFeu : NetworkBehaviour
         {
             //Le nombre de fois augmente de 1
             nombreCollisionsBalle.Value++;
+            // Le son du brise glasse joue
+            audioSource.PlayOneShot(BreakingGlass);
 
             if (nombreCollisionsBalle.Value >= 3)
             {
