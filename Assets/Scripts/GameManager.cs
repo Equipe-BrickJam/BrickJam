@@ -9,13 +9,18 @@ public class GameManager : NetworkBehaviour
     public GameObject menu;
     public GameObject panelDeConnexion;
 
+    [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
+
+    public GameObject[] blocGlacePrefab;
+    public GameObject[] blocFeuPrefab;  
+
     public NetworkObject boutonHote;
     public NetworkObject boutonClient;
 
     public static GameManager instance;// Singleton pour parler au GameManager de n'importe où
     public bool partieEnCours { private set; get; } //permet de savoir si une partie est en cours
     public bool partieTerminee { private set; get; } // permet de savoir si une partie est terminée
-    [SerializeField] private GameObject ballPrefab; // assign prefab in inspector
+
     public BalleRigid balleInstance;
 
     //Variable du son
@@ -111,6 +116,20 @@ public class GameManager : NetworkBehaviour
             GameObject balle = Instantiate(ballPrefab, new Vector2(0f, 0.5f), Quaternion.identity);
             balle.GetComponent<NetworkObject>().Spawn(true); // true = server owns it
             balleInstance = balle.GetComponent<BalleRigid>();
+        }
+
+        foreach (var blocGlaceSpawn in blocGlacePrefab)
+        {
+            var blocGlaceCopie = Instantiate(blocGlaceSpawn);
+            blocGlaceCopie.GetComponent<NetworkObject>().Spawn();
+            blocGlaceCopie.SetActive(true);
+        }
+
+        foreach (var blocFeuSpawn in blocFeuPrefab)
+        {
+            var blocFeuCopie = Instantiate(blocFeuSpawn);
+            blocFeuCopie.GetComponent<NetworkObject>().Spawn();
+            blocFeuCopie.SetActive(true);
         }
 
         BalleRigid.instance.LanceBalleMilieu();

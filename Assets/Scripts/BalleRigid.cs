@@ -8,6 +8,11 @@ using UnityEngine.SceneManagement;
 
 public class BalleRigid : NetworkBehaviour
 {
+
+    public GameObject pointage;
+
+    public GameObject Game;
+
     public static BalleRigid instance; // Singleton
     float maxDistanceY = 4.7f; // moitié de la largeur de la table, pour savoir si un but est compté
     [SerializeField] private float nombreDeBonds; //compte du nombre de bonds de la balle // Servira plus tard
@@ -23,11 +28,17 @@ public class BalleRigid : NetworkBehaviour
     public bool blocsGlaceDetruits = false;
     public bool blocsFeuDetruits = false;
 
+    public float pointageServeur;
+
+    public float pointageClient;
 
     //Variable du son
     public AudioClip sonRebond;
     public AudioClip sonSwitchCouleur;
     private AudioSource audioSource;
+
+    public TextMeshProUGUI textePointageBleu;
+    public TextMeshProUGUI textePointageRouge;
 
     private void Awake()
     {
@@ -73,12 +84,18 @@ public class BalleRigid : NetworkBehaviour
             //LanceBalleMilieu();
         }
 
+        Score();
+    }
+    public void Score()
+    {
         //if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
         //****************TEST****************//
         if (Input.GetKeyDown(KeyCode.G))
         {
             blocsGlaceDetruits = true;
             Pointage.instance.AjouterPointage(false, 1);
+            pointageServeur += 1;
+            Game.GetComponent<GameManager>().NouvellePartie();
         }
 
         //else if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
@@ -87,7 +104,12 @@ public class BalleRigid : NetworkBehaviour
         {
             blocsFeuDetruits = true;
             Pointage.instance.AjouterPointage(true, 1);
+            pointageClient += 1;
+            Game.GetComponent<GameManager>().NouvellePartie();
         }
+
+        textePointageBleu.text = pointageServeur.ToString();
+        textePointageRouge.text = pointageClient.ToString();
     }
 
     public void LanceBalleMilieu()
@@ -191,12 +213,13 @@ public class BalleRigid : NetworkBehaviour
         GetComponent<Rigidbody2D>().linearVelocity = direction * force;
     }
 
-    public void Joueur1Gagne()
+    [Rpc(SendTo.Everyone)]
+    public void Joueur1GagneRpc()
     {
         SceneManager.LoadScene("BleuGagne");
     }
 
-    public void Joueur2Gagne()
+    public void Joueur2GagneRpc()
     {
         SceneManager.LoadScene("RougeGagne");
     }

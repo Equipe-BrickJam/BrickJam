@@ -37,16 +37,7 @@ public class CollisionBlockFeu : NetworkBehaviour
         // Quand la valeur des collisions change, on met à jour le sprite localement (clients et serveur)
         nombreCollisionsBalle.OnValueChanged += (oldValue, newValue) =>
         {
-            if (newValue == 1){
-                // Le sprite change en block dommagé niveau 1
-                spriteRenderer.sprite = blockDamage1Feu;
-            }
-            else if (newValue == 2)
-            {
-                // Le sprite change en block dommagé niveau 2
-                spriteRenderer.sprite = blockDamage2Feu;
-
-            }
+            UpdateSprite(newValue);
         };
     }
 
@@ -54,6 +45,16 @@ public class CollisionBlockFeu : NetworkBehaviour
     void Update()
     {
         
+    }
+
+    private void UpdateSprite(int state)
+    {
+        switch (state)
+        {
+            case 0: spriteRenderer.sprite = blocInitialFeu; break;
+            case 1: spriteRenderer.sprite = blockDamage1Feu; break;
+            case 2: spriteRenderer.sprite = blockDamage2Feu; break;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D infoCollision)

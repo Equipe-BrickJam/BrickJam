@@ -15,7 +15,6 @@ public class CollisionBlockGlace : NetworkBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-
     //Variable du son
     public AudioClip BreakingGlass;
     private AudioSource audioSource;
@@ -40,21 +39,22 @@ public class CollisionBlockGlace : NetworkBehaviour
         // Quand la valeur des collisions change, on met à jour le sprite localement (clients et serveur)
         nombreCollisionsBalle.OnValueChanged += (oldValue, newValue) =>
         {
-            if (newValue == 1)
-            {
-                spriteRenderer.sprite = blockDamage1Glace;
-            }
-            else if (newValue == 2)
-            {
-                spriteRenderer.sprite = blockDamage2Glace;
-            }
+            UpdateSprite(newValue);
         };
     }
 
+    private void UpdateSprite(int state)
+    {
+        switch (state)
+        {
+            case 0: spriteRenderer.sprite = blocInitialGlace; break;
+            case 1: spriteRenderer.sprite = blockDamage1Glace; break;
+            case 2: spriteRenderer.sprite = blockDamage2Glace; break;
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
     {
-        if (!IsServer) return;
 
         if (infoCollision.gameObject.CompareTag("BalleJoueur1"))
         {

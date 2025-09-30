@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Pointage : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class Pointage : MonoBehaviour
     public BalleRigid scriptBalle;
 
     public int scoreVictoire = 3;
+
+    public TextMeshProUGUI textePointageBleu;
+    public TextMeshProUGUI textePointageRouge;
     void Awake()
     {
         if (instance == null)
@@ -27,9 +31,9 @@ public class Pointage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    //Méthode pour ajouter des points
+    //Mï¿½thode pour ajouter des points
 
     public void AjouterPointage(bool isServer, int points)
     {
