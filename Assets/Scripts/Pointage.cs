@@ -4,49 +4,47 @@ using TMPro;
 
 public class Pointage : MonoBehaviour
 {
-    //Itinialisation du pointage
+    // Initialisation des scores
     public int pointageServeur = 0;
     public int pointageClient = 0;
 
     public static Pointage instance;
     public BalleRigid scriptBalle;
 
-    public int scoreVictoire = 3;
+    public int scoreVictoire = 3; // Score nécessaire pour gagner
 
     public TextMeshProUGUI textePointageBleu;
     public TextMeshProUGUI textePointageRouge;
+
     void Awake()
     {
+        // Implémentation du pattern Singleton
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // Garde ce GameObject entre les scènes
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Empêche les doublons
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
-    //M�thode pour ajouter des points
+    // Méthode pour ajouter des points à un joueur
     public void AjouterPointage(bool isServer, int points)
     {
+        // Vérifie que la partie est en cours et non terminée
         if (GameManager.instance.partieEnCours && !GameManager.instance.partieTerminee)
         {
             if (isServer)
             {
                 pointageServeur += points;
-                scriptBalle.blocsFeuDetruits = false;
+                scriptBalle.blocsFeuDetruits = false; // Réinitialise l'état des blocs feu
             }
             else
             {
                 pointageClient += points;
-                scriptBalle.blocsGlaceDetruits = false;
+                scriptBalle.blocsGlaceDetruits = false; // Réinitialise l'état des blocs glace
             }
 
             Debug.Log($"Score Serveur: {pointageServeur} & Score Client: {pointageClient}");
@@ -55,17 +53,18 @@ public class Pointage : MonoBehaviour
         }
     }
 
+    // Vérifie si un joueur a atteint le score de victoire
     private void VerifierVictoire()
     {
         if (pointageClient >= scoreVictoire)
         {
             GameManager.instance.FinPartie();
-            SceneManager.LoadScene("BleuGagne");
+            SceneManager.LoadScene("BleuGagne"); // Le client (joueur bleu) gagne
         }
         else if (pointageServeur >= scoreVictoire)
         {
             GameManager.instance.FinPartie();
-            SceneManager.LoadScene("RougeGagne");
+            SceneManager.LoadScene("RougeGagne"); // Le serveur (joueur rouge) gagne
         }
     }
 }

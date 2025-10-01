@@ -123,7 +123,7 @@ Transform:
   m_GameObject: {fileID: 1523830429374756501}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.18, z: 0}
+  m_LocalPosition: {x: 0.12, y: -1.81, z: 0}
   m_LocalScale: {x: -0.01, y: -0.01, z: -0.01}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -296,7 +296,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   pointage: {fileID: 0}
   Game: {fileID: 0}
-  nombreDeBonds: 0
   tagJoueur1: BalleJoueur1
   tagJoueur2: BalleJoueur2
   vitesseDepart: 10

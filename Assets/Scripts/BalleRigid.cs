@@ -3,19 +3,19 @@ using System;
 using System.Collections;
 using Unity.Netcode;
 using TMPro;
-using Unity.Netcode.Components;// pour accéder aux propriétés du NetworkTransform
+using Unity.Netcode.Components; // Pour accéder aux propriétés du NetworkTransform
 using UnityEngine.SceneManagement;
 
 public class BalleRigid : NetworkBehaviour
 {
-
     public GameObject pointage;
 
     public GameObject Game;
 
     public static BalleRigid instance; // Singleton
-    float maxDistanceY = 4.7f; // moitié de la largeur de la table, pour savoir si un but est compté
-    [SerializeField] private float nombreDeBonds; //compte du nombre de bonds de la balle // Servira plus tard
+
+    float maxDistanceY = 4.7f; // Moitié de la hauteur du terrain, utilisé pour détecter les buts
+
     public string tagJoueur1 = "BalleJoueur1";
     public string tagJoueur2 = "BalleJoueur2";
     public float vitesseDepart = 10f;
@@ -28,11 +28,10 @@ public class BalleRigid : NetworkBehaviour
     public bool blocsGlaceDetruits = false;
     public bool blocsFeuDetruits = false;
 
-    public float pointageServeur; // pointage Bleu
+    public float pointageServeur; // Pointage pour le joueur Bleu (serveur)
+    public float pointageClient;  // Pointage pour le joueur Rouge (client)
 
-    public float pointageClient; // pointage Rouge
-
-    //Variable du son
+    // Variables audio
     public AudioClip sonRebond;
     public AudioClip sonSwitchCouleur;
     private AudioSource audioSource;
@@ -42,6 +41,7 @@ public class BalleRigid : NetworkBehaviour
 
     private void Awake()
     {
+        // Mise en place du singleton
         if (instance == null)
         {
             instance = this;
@@ -50,93 +50,117 @@ public class BalleRigid : NetworkBehaviour
         Destroy(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start est appelé avant la première frame Update
     void Start()
     {
-        //Chercher le sprite renderer une seule fois dans le start au lieu du update
+        // Référence au SpriteRenderer de la balle (à faire une seule fois)
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // l'audioSource viens chercher le component du block 
+        // Récupère le composant AudioSource sur la balle
         audioSource = GetComponent<AudioSource>();
 
-        //Initie le sprite de la balle en premier
+        // Initialise le sprite de la balle
         spriteRenderer.sprite = balleInitial;
     }
 
-    // Update is called once per frame
+    // Update est appelé une fois par frame
     void Update()
     {
+        // Exécute uniquement sur le serveur
         if (!IsServer)
         {
             return;
         }
+
         if (!GameManager.instance.partieEnCours) return;
 
-        //but client
+        // But pour le joueur 1 (la balle sort en bas)
         if (transform.position.y < -maxDistanceY)
         {
             //LanceBalleMilieu();
         }
 
-        //but serveur (hôte)
+        // But pour le joueur 2 (la balle sort en haut)
         if (transform.position.y > maxDistanceY)
         {
             //LanceBalleMilieu();
         }
 
-        ScoreRpc();
     }
+
     [Rpc(SendTo.Everyone)]
     public void ScoreRpc()
     {
-        //****************TEST****************//
-        if (Input.GetKeyDown(KeyCode.G) || GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
+        // Si tous les blocs de glace (équipe bleue) sont détruits
+        if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
         {
             blocsGlaceDetruits = true;
             Pointage.instance.AjouterPointage(false, 1);
             pointageServeur += 1;
             Game.GetComponent<GameManager>().NouvellePartie();
+            // Vérifie si un camp a perdu tous ses blocs
+            ScoreRpc();
         }
 
-        //****************TEST****************//
-        if (Input.GetKeyDown(KeyCode.F) || GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
+        // Si tous les blocs de feu (équipe rouge) sont détruits
+        if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
         {
             blocsFeuDetruits = true;
             Pointage.instance.AjouterPointage(true, 1);
             pointageClient += 1;
             Game.GetComponent<GameManager>().NouvellePartie();
+            // Vérifie si un camp a perdu tous ses blocs
+            ScoreRpc();
         }
 
+        // Met à jour les textes de pointage
         textePointageBleu.text = pointageServeur.ToString();
         textePointageRouge.text = pointageClient.ToString();
     }
 
     public void LanceBalleMilieu()
     {
-        //nombreDeBonds = 0;
+        // Désactive l’interpolation réseau temporairement pour repositionner proprement
         GetComponent<NetworkTransform>().Interpolate = false;
-        transform.position = new Vector2(0f, 0.5f);
+
+        // Replace la balle au centre du terrain
+        transform.position = new Vector2(0.12f, -1.81f);
         GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
         if (GameManager.instance.partieTerminee) return;
+
+        // Relance la balle après un délai
         StartCoroutine(NouvelleBalle());
     }
 
-    IEnumerator NouvelleBalle()
+    [Rpc(SendTo.Everyone)]
+    private void SynchroniserPositionClientRpc(Vector2 nouvellePosition)
+    {
+        // Synchronise la position de la balle côté client
+        transform.position = nouvellePosition;
+
+        // Par sécurité, stoppe aussi le mouvement
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+            rb.linearVelocity = Vector2.zero;
+    }
+
+    private IEnumerator NouvelleBalle()
     {
         yield return new WaitForSecondsRealtime(1f);
-        GetComponent<NetworkTransform>().Interpolate = true;
 
-        //La balle peut partir dans tout les angles
+        // Calcule une direction aléatoire (angle complet)
         float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
 
-        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+        // Applique une impulsion dans cette direction
         GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
     }
 
     [ClientRpc]
     private void ChangeSpriteClientRpc(int spriteType)
     {
+        // Change la couleur de la balle selon le joueur
         switch (spriteType)
         {
             case 0: spriteRenderer.sprite = balleInitial; break;
@@ -147,51 +171,44 @@ public class BalleRigid : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
     {
-        //Si elle rentre en collision avec un block
-        if(infoCollision.gameObject.tag == "BlocFeu" || infoCollision.gameObject.tag == "BlocGlace")
+        // Collision avec un bloc feu ou glace
+        if (infoCollision.gameObject.tag == "BlocFeu" || infoCollision.gameObject.tag == "BlocGlace")
         {
-            // On fait jouer le son du rebond
+            // Joue le son du rebond
             audioSource.PlayOneShot(sonRebond);
-
         }
 
-
-        //Si elle rentre en collision avec un blouclier OU un block
+        // Collision avec un joueur
         if (infoCollision.gameObject.tag == "Joueur1")
         {
             gameObject.tag = tagJoueur1;
-            ChangeSpriteClientRpc(1); // Change la couleur de la balle en bleu pour le joueur 1
-            
-            // Le son de la balle qui change de couleur
+            ChangeSpriteClientRpc(1); // Balle devient bleue
+
+            // Son du changement de couleur
             audioSource.PlayOneShot(sonSwitchCouleur);
         }
-
         else if (infoCollision.gameObject.tag == "Joueur2")
         {
             gameObject.tag = tagJoueur2;
-            ChangeSpriteClientRpc(2); // Change la couleur de la balle en rouge pour le joueur 2
+            ChangeSpriteClientRpc(2); // Balle devient rouge
 
-            // Le son de la balle qui change de couleur
+            // Son du changement de couleur
             audioSource.PlayOneShot(sonSwitchCouleur);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //Si la balle rentre en collision avec les extrémités du bas et du haut, elle reviens au millieu
+        // Si la balle touche une limite (haut/bas du terrain)
         if (other.gameObject.tag == "Limite")
         {
-            // Stop la balle
+            // Stoppe le mouvement
             GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
 
-            // Remet à la position de départ
+            // Replace la balle au centre
             transform.position = new Vector2(0f, 0.5f);
 
-            // On projeter de facon random
-
-            // Attend un petit délai avant de relancer la balle (optionnel)
-            //StartCoroutine(LancerBalleApresDelai(0.5f));
-            
+            // Relance la balle après un petit délai
             StartCoroutine(NouvelleBalle());
         }
     }
@@ -200,26 +217,27 @@ public class BalleRigid : NetworkBehaviour
     {
         yield return new WaitForSeconds(delai);
 
-        // Crée une direction aléatoire X et Y (évite les 0)
+        // Crée une direction aléatoire (évite les valeurs nulles)
         float x = UnityEngine.Random.Range(-1f, 1f);
-        float y = UnityEngine.Random.Range(0.5f, 1f); // vers le haut seulement
+        float y = UnityEngine.Random.Range(0.5f, 1f); // Vers le haut uniquement
 
         Vector2 direction = new Vector2(x, y).normalized;
+        float force = 5f; // Force de lancement
 
-        float force = 5f; // Ajuste la vitesse ici
-
-        // Applique la vitesse
+        // Applique la vitesse à la balle
         GetComponent<Rigidbody2D>().linearVelocity = direction * force;
     }
 
     [Rpc(SendTo.Everyone)]
     public void Joueur1GagneRpc()
     {
+        // Charge la scène de victoire du joueur 1
         SceneManager.LoadScene("BleuGagne");
     }
 
     public void Joueur2GagneRpc()
     {
+        // Charge la scène de victoire du joueur 2
         SceneManager.LoadScene("RougeGagne");
     }
 }

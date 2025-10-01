@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using Unity.Netcode;
 using TMPro;
-using Unity.Netcode.Components;// pour accéder aux propriétés du NetworkTransform
+using Unity.Netcode.Components; // Pour accéder aux propriétés du NetworkTransform
 
 public class CollisionBlockGlace : NetworkBehaviour
 {
@@ -15,34 +15,33 @@ public class CollisionBlockGlace : NetworkBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    //Variable du son
+    // Variable pour le son de casse
     public AudioClip BreakingGlass;
     private AudioSource audioSource;
 
-    //Compteur collision de la balle: NetworkVariable initialisé à 0
+    // Compteur de collisions avec la balle (synchronisé en réseau)
     private NetworkVariable<int> nombreCollisionsBalle = new NetworkVariable<int>(0);
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Start est appelé avant la première frame Update
     void Start()
     {
-        //Chercher le sprite renderer une seule fois dans le start au lieu du update
+        // Récupère le SpriteRenderer une seule fois
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-
-        // l'audioSource viens chercher le component du block 
+        // Récupère le composant AudioSource attaché à ce bloc
         audioSource = GetComponent<AudioSource>();
 
-        //S'assurer que la sprite initiale est charg�e en premier
+        // Initialise le sprite avec l'apparence de départ
         spriteRenderer.sprite = blocInitialGlace;
 
-        // Quand la valeur des collisions change, on met à jour le sprite localement (clients et serveur)
+        // Met à jour le sprite à chaque changement de valeur du compteur (client et serveur)
         nombreCollisionsBalle.OnValueChanged += (oldValue, newValue) =>
         {
             UpdateSprite(newValue);
         };
     }
 
+    // Met à jour le sprite en fonction du nombre de collisions
     private void UpdateSprite(int state)
     {
         switch (state)
@@ -55,14 +54,16 @@ public class CollisionBlockGlace : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D infoCollision)
     {
-
+        // Si la balle du joueur 1 touche le bloc
         if (infoCollision.gameObject.CompareTag("BalleJoueur1"))
         {
-            //Le nombre de fois augmente de 1
+            // Incrémente le compteur de collisions
             nombreCollisionsBalle.Value++;
-            // Le son du brise glasse joue
+
+            // Joue le son de verre cassé
             audioSource.PlayOneShot(BreakingGlass);
 
+            // Si le bloc a été touché 3 fois, il est détruit sur le réseau
             if (nombreCollisionsBalle.Value >= 3)
             {
                 GetComponent<NetworkObject>().Despawn(true);
