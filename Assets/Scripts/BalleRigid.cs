@@ -148,10 +148,17 @@ public class BalleRigid : NetworkBehaviour
     private IEnumerator NouvelleBalle()
     {
         yield return new WaitForSecondsRealtime(1f);
-
-        // Calcule une direction aléatoire (angle complet)
-        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 5f);
-        Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+ 
+        Vector2 direction;
+        do
+        {
+        // Angle entre 0 et 360 degrés en radians
+        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
+ 
+        // On vérifie que l’angle n’est pas trop proche de l’horizontale ou verticale
+        // Ici on impose un minimum de 0.3 (ajustable) sur les composantes X et Y
+        } while (Mathf.Abs(direction.x) < 0.3f || Mathf.Abs(direction.y) < 0.3f);
 
         // Applique une impulsion dans cette direction
         GetComponent<Rigidbody2D>().AddForce(direction * vitesseDepart, ForceMode2D.Impulse);
