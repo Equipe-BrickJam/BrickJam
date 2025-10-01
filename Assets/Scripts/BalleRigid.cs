@@ -92,7 +92,7 @@ public class BalleRigid : NetworkBehaviour
     public void ScoreRpc()
     {
         // Si tous les blocs de glace (équipe bleue) sont détruits
-        if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("BlocGlace").Length == 0 || Input.GetKey(KeyCode.G))
         {
             blocsGlaceDetruits = true;
             Pointage.instance.AjouterPointage(false, 1);
@@ -103,7 +103,7 @@ public class BalleRigid : NetworkBehaviour
         }
 
         // Si tous les blocs de feu (équipe rouge) sont détruits
-        if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0)
+        if (GameObject.FindGameObjectsWithTag("BlocFeu").Length == 0 || Input.GetKey(KeyCode.F))
         {
             blocsFeuDetruits = true;
             Pointage.instance.AjouterPointage(true, 1);
@@ -150,7 +150,7 @@ public class BalleRigid : NetworkBehaviour
         yield return new WaitForSecondsRealtime(1f);
 
         // Calcule une direction aléatoire (angle complet)
-        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 2f);
+        float angle = UnityEngine.Random.Range(0f, Mathf.PI * 5f);
         Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)).normalized;
 
         // Applique une impulsion dans cette direction

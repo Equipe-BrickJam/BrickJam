@@ -2126,7 +2126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7820641192926920807, guid: cfdc86e9c3e792a4a84cfb79ad1d2fc7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.33
+      value: 9.42
       objectReference: {fileID: 0}
     - target: {fileID: 7820641192926920807, guid: cfdc86e9c3e792a4a84cfb79ad1d2fc7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2234,7 +2234,7 @@ MonoBehaviour:
   blocFeuPrefab: {fileID: 238355588936553085, guid: 5b2564334fe08fb43939f417d5f11667, type: 3}
   blocGlacePrefab: {fileID: 3249952309634958389, guid: 3b273f565f5c95a4bad028f37a8a329f, type: 3}
   lignes: 6
-  colonnes: 8
+  colonnes: 4
   espacementX: 4
   espacementY: 0.6
   positionDepart: {x: -6.52, y: 1.5}
@@ -2873,7 +2873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7820641192926920807, guid: cfdc86e9c3e792a4a84cfb79ad1d2fc7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.42
+      value: -9.45
       objectReference: {fileID: 0}
     - target: {fileID: 7820641192926920807, guid: cfdc86e9c3e792a4a84cfb79ad1d2fc7, type: 3}
       propertyPath: m_LocalPosition.y
